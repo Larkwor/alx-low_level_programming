@@ -1,5 +1,5 @@
 
-#include "main.c"
+#include "main.h"
 
 
 /**
