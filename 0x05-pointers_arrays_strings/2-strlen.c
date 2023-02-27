@@ -1,14 +1,19 @@
-#include "main.h"
+#include <stdio.h>
+
+int _strlen(char *);
+
 /**
- * *_strlen_recursion - finds string length
- * *@s: pointer for string
- * *Return: returns the length of a string
- * */
-
-int _strlen_recursion(char *s)
+ * main - check the code for Holberton School students.
+ *
+ * Return: Always 0.
+ */
+int main(void)
 {
-	if (*s == '\0')
-		return (0);
+	char *str;
+	int len;
 
-	return (_strlen_recursion(s + 1) + 1);
+	str = "Holberton!";
+	len = _strlen(str);
+	printf("%d\n", len);
+	return (0);
 }
