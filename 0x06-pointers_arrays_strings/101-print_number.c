@@ -1,20 +1,21 @@
 #include "main.h"
-/**
- * print_number - prints an integer
- * @n: tracked var
- */
-void print_number(int n)
-{
-	unsigned int x = n;
 
-	if (n < 0)
-	{
-		putchar(45);
-		x = -x;
-	}
-	if ((x / 10) > 0)
-	{
-		print_number(x / 10);
-	}
-	putchar((x % 10) + 48);
+/**
+ * main - check the code
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+print_number(98);
+_putchar('\n');
+print_number(402);
+_putchar('\n');
+print_number(1024);
+_putchar('\n');
+print_number(0);
+_putchar('\n');
+print_number(-98);
+_putchar('\n');
+return (0);
 }
