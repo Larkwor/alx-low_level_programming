@@ -1,11 +1,24 @@
+#include <stdio.h>
 #include "main.h"
 
 /**
- * set_string - sets the value of a pointer to a char
- * @s: pointer to pointer we need to set to
- * @to: string to set
+ * print_diagsums - print sum of diagonal matrix
+ * @a: pointer to multidimensional array
+ * @size: size of array
  */
-void set_string(char **s, char *to)
+
+void print_diagsums(int *a, int size)
 {
-	*s = to;
+	int i, j, k, rsum, lsum;
+
+	rsum = lsum = 0;
+
+	j = 0, k = size - 1;
+
+	for (i = 0; i < size; ++i, j += size + 1, k += size - 1)
+	{
+		lsum += *(a + j);
+		rsum += *(a + k);
+	}
+	printf("%d, %d\n", lsum, rsum);
 }
