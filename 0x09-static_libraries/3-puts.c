@@ -1,20 +1,18 @@
 #include "main.h"
 
 /**
- * _puts- A function that prints a string
- * @str: The pointer variable
+ *_puts - Prints a string
+ *@str:  String to be printed
  *
- * Return: void
- * Student: Adewale
- */
+ **/
 void _puts(char *str)
-{
-	int strlen = 0;
 
-	while (str[strlen] != '\0')
+{
+	int n;
+
+	for (n = 0 ; str[n] != '\0' ; n++)
 	{
-		putchar(str[strlen]);
-		strlen++;
+		_putchar(str[n]);
 	}
-	putchar('\n');
+	_putchar('\n');
 }
