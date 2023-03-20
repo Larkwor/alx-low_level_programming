@@ -1,15 +1,11 @@
 #include <stdio.h>
-
 /**
- * main - entry point
+ * main - prints the name of the file it was compiled from.
  *
- * Description: prints the file input into the preprocessor
- *
- * Return: 0
+ * Return: Always 0 (Success).
  */
 int main(void)
 {
 	printf("%s\n", __FILE__);
-
 	return (0);
-}i
+}
