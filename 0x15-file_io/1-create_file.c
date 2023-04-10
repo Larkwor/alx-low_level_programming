@@ -1,7 +1,5 @@
-#include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-#include <sys/stat.h>
 
 /**
  * create_file - Creates a file.
@@ -15,9 +13,9 @@ int create_file(const char *filename, char *text_content) {
         return -1;
     }
 
-    int flags = O_WRONLY | O_CREAT | O_TRUNC;
-    mode_t mode = S_IRUSR | S_IWUSR;
-    int fd = open(filename, flags, mode);
+    int flags = O
+    mode_t mode = s
+    int fd = (filename, flags, mode);
 
     if (fd == -1) {
         return -1;
