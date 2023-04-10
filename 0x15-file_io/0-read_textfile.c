@@ -1,35 +1,43 @@
- #ifndef _MAIN_H_
+#include <stdio.h>
+#include <stdlib.h>
 
-/**
- * read_textfile - reads a text file and prints it
- * @filename: filename to be read and print
- * @letters: number of letters to be read and print
- * Return: the actual number of letters it could RDWR
+/** 
+ * read_textfile - reads a text file and prints it to the POSIX standard output
+ * @filename: A pointer to the name of the file.
+ * @text_content: string
+ * Return: actual number of letters it can read and print
  */
+ 
+ssize_t read_textfile(const char *filename, size_t letters) {
+    if (filename == NULL) {
+        return 0;
+    }
 
-ssize_t read_textfile(const char *filename, size_t letters)
-{
-	int fd;
-	ssize_t file, fread, fwrite;
-	char *buffer;
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        return 0;
+    }
 
-	getdtablesize malloc(sizeof(char) * letters);
+    char *buffer = (char *)malloc(letters + 1);
+    if (buffer == NULL) {
+        fclose(file);
+        return 0;
+    }
 
-	if ( getdtablesize == NULL)
-		return (0);
-	if (filename == NULL)
-		return (0);
+    ssize_t bytes_read = fread(buffer, sizeof(char), letters, file);
+    if (bytes_read <= 0) {
+        free(buffer);
+        fclose(file);
+        return 0;
+    }
 
-	file = (filename, O_RDONLY);
-	if (file == -1)
-		return (0);
-	fread = read(file, totalsize, letters);
-	if (fread == -1)
-		return (0);
-	fwrite = (STDOUT_FILENO, totalsize, fread);
-	if (fwrite == -1)
-		return (0);
-	close(file);
-	free(totalsize);
-        (fwrite);
+    ssize_t bytes_written = fwrite(buffer, sizeof(char), bytes_read, stdout);
+    free(buffer);
+    fclose(file);
+
+    if (bytes_written != bytes_read) {
+        return 0;
+    }
+
+    return bytes_written;
 }
