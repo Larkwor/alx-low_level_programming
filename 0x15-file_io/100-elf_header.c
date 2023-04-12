@@ -1,10 +1,17 @@
-#include <elf.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <elf.h>
+
+void print_header_info(unsigned char *e_ident) {
+    printf("ELF Header:\n");
+    print_magic(e_ident);
+    print_class(e_ident);
+    print_data(e_ident);
+    print_version(e_ident);
+    print_osabi(e_ident);
+}
 
 void print_magic(unsigned char *e_ident) {
     printf("  Magic:   ");
@@ -14,7 +21,7 @@ void print_magic(unsigned char *e_ident) {
     printf("\n");
 }
 
-void print_class(unsigned char e_ident[EI_NIDENT]) {
+void print_class(unsigned char *e_ident) {
     printf("  Class:                             ");
     switch (e_ident[EI_CLASS]) {
         case ELFCLASSNONE:
@@ -32,7 +39,7 @@ void print_class(unsigned char e_ident[EI_NIDENT]) {
     }
 }
 
-void print_data(unsigned char e_ident[EI_NIDENT]) {
+void print_data(unsigned char *e_ident) {
     printf("  Data:                              ");
     switch (e_ident[EI_DATA]) {
         case ELFDATANONE:
@@ -50,7 +57,7 @@ void print_data(unsigned char e_ident[EI_NIDENT]) {
     }
 }
 
-void print_version(unsigned char e_ident[EI_NIDENT]) {
+void print_version(unsigned char *e_ident) {
     printf("  Version:                           %d", e_ident[EI_VERSION]);
     if (e_ident[EI_VERSION] == EV_CURRENT) {
         printf(" (current)\n");
@@ -59,7 +66,7 @@ void print_version(unsigned char e_ident[EI_NIDENT]) {
     }
 }
 
-void print_osabi(unsigned char e_ident[EI_NIDENT]) {
+void print_osabi(unsigned char *e_ident) {
     printf("  OS/ABI:                            ");
     switch (e_ident[EI_OSABI]) {
         case ELFOSABI_SYSV:
@@ -86,4 +93,14 @@ void print_osabi(unsigned char e_ident[EI_NIDENT]) {
         case ELFOSABI_TRU64:
             printf("UNIX - TRU64\n");
             break;
+        case ELFOSABI_ARM:
+            printf("ARM\n");
+            break;
+        case ELFOSABI_STANDALONE:
+            printf("Standalone (embedded) application\n");
+            break;
+        default:
+            printf("<unknown: %x>\n", e_ident[EI_OSABI]);
+            break;
+    }
 }
