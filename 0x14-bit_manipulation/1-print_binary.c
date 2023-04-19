@@ -6,23 +6,17 @@
  */
 void print_binary(unsigned long int n)
 {
-	unsigned long int mask = 1, max_mask = ULONG_MAX;
-	int shift = sizeof(unsigned long int) * 8 - 1;
+	unsigned long int bit = 1;
+	unsigned long int max_mask = 1 << (sizeof(unsigned long int) * 8 - 1);
 
-	max_mask <<= shift;
-
-	while (mask <= max_mask)
+	while (max_mask > 0)
 	{
-		if ((n & max_mask) == 0)
+		if ((n & bit) == 0)
 			_putchar('0');
 		else
 			_putchar('1');
 
-		mask <<= 1;
-		shift--;
-
-		if (shift < 0)
-			break;
+		bit <<= 1;
 		max_mask >>= 1;
 	}
 
