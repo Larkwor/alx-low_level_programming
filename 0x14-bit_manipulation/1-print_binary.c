@@ -1,31 +1,35 @@
-#include "main.h"
 #include <stdio.h>
 
 /**
- * print_binary - Prints the binary representation of a number
- * @n: The number to print in binary
+ * print_binary - function that prints the binary representation of a number
+ * @n: number to be converted to binary and printed
+ *
+ * Return: void
  */
 void print_binary(unsigned long int n)
 {
-    unsigned long int mask = 1, max_mask = ULONG_MAX;
-    int shift = sizeof(unsigned long int) * 8 - 1;
-
-    max_mask <<= shift;
-
-    while (mask <= max_mask)
+    if (n == 0)
     {
-        if ((n & max_mask) == 0)
-            putchar('0');
-        else
-            putchar('1');
-
-        mask <<= 1;
-        shift--;
-
-        if (shift < 0)
-            break;
-        max_mask >>= 1;
+        putchar('0');
+        return;
     }
+    else if (n == 1)
+    {
+        putchar('1');
+        return;
+    }
+    else
+    {
+        print_binary(n >> 1);
+        putchar((n & 1) + '0');
+    }
+}
 
-    return;
+int main(void)
+{
+    unsigned long int num = 10; // Example number
+    printf("The binary representation of %lu is: ", num);
+    print_binary(num);
+    printf("\n");
+    return 0;
 }
